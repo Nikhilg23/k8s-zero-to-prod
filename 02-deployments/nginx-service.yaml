@@ -3,7 +3,7 @@
     metadata:
       name: nginx-service
     spec:
-      type: ClusterIP
+      type: ClusterIP      # service type is ClusterIP why because it is only accessible within the cluster privately with out exposing it to the outside world.  
       selector:
         app: nginx
       ports:
