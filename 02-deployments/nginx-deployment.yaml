@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:               # pod specs
+  replicas: 2       # ensures high availability
+  selector:         # tells the Deployment which Pods it manages 
+    matchLabels:
+      app: nginx
+  template:         # blueprint for Pods
+    metadata:
+      labels:       # MUST match selector otherwise Deployment won’t manage Pods
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:                # used by the scheduler
+              cpu: "100m"
+              memory: "128Mi"
+            limits:                # prevents a pod from killing the node
+              cpu: "250m"
+              memory: "256Mi"
+
