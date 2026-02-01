@@ -10,4 +10,4 @@ RollingUpdateStrategy:  25% max unavailable, 25% max surge
 - kubectl apply -f service-name
 - kubectl get pods -n namespace-name
 - kubectl get svc -n namespace-name
-- kubectl get pods -n namepsace-name -w [w is watch mode ] its help to show the pods behavior 
+- kubectl get pods -n namepsace-name -w [w is watch mode ] its help to show the pods behavior.
