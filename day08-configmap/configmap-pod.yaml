@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-pod
+  namespace: dev-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-pod
+  template:
+    metadata:
+      labels:
+        app: configmap-pod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_ENV
+        - name: APP_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_VERSION
