@@ -1,16 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment
+  name: hpa-deployment
+  namespace: dev-quota
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: hpa-app
   template:
     metadata:
       labels:
-        app: hpa-app  
+        app: hpa-app
     spec:
       containers:
       - name: hpa-container
@@ -20,7 +21,6 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 128Mi
           limits:
             cpu: 200m
-            memory: 256Mi
+
