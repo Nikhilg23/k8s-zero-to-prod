@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-deployment
+  namespace: dev-1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-config
+  template:
+    metadata:
+      labels:
+        app: app-config
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        env:
+        - name: APP_MODE
+          valueFrom:
+            configMapKeyRef:
+                name: app-config
+                key: APP_MODE
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
+    
