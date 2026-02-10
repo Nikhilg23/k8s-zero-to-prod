@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secret-deployment
+  namespace: dev-2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: secret-app
+  template:
+    metadata:
+      labels:
+        app: secret-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username         
+        - name: DB_PASSWORD 
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
