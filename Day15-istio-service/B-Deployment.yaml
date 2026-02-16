@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: color-app
+      version: green
+  template:
+    metadata:
+      labels:
+        app: color-app
+        version: green
+    spec:
+      containers:
+      - name: green
+        image: nginx
+        ports:
+        - containerPort: 80
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          echo "<html><body style='background-color:green; color:white; text-align:center;'><h1>I AM GREEN</h1></body></html>" > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'
