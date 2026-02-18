@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-deployment-v1
+  namespace: dev01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: color-app-v1
+      version: blue-v1
+  template:
+    metadata:
+      labels:
+        app: color-app-v1
+        version: blue-v1
+    spec:
+      containers:
+      - name: blue-container
+        image: nikhilg23/blue-app:v1
+        ports:
+        - containerPort: 80
